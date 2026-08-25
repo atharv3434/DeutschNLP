@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeutschNLP Studio — German NLP Inspector</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="logo">
+      <span class="flag">🇩🇪</span>
+      <h1>Deutsch<span>NLP</span> Studio</h1>
+    </div>
+    <p class="tagline">Morphosyntaktische Analyse, Komposita-Zerlegung & NER für die deutsche Sprache</p>
+  </header>
+
+  <main class="container">
+    <!-- Input Section -->
+    <section class="card input-card">
+      <div class="card-header">
+        <h2>Eingabetext (German Text Input)</h2>
+        <div class="preset-buttons">
+          <button type="button" class="btn-preset" data-text="Der erfahrene Softwareingenieur arbeitet bei CGI in Pune und entwickelt innovative Webanwendungen.">Beispiel 1</button>
+          <button type="button" class="btn-preset" data-text="Die Donaudampfschifffahrtsgesellschaftskapitäne besuchten das historische Stadtzentrum von München mit ihren Familien.">Beispiel 2 (Komposita)</button>
+        </div>
+      </div>
+
+      <textarea id="textInput" placeholder="Geben Sie hier einen deutschen Satz oder Text ein...">Der fleißige Informatiker kaufte ein neues Lehrbuch am Hauptbahnhof in Berlin und freute sich sehr über die schnelle Lieferung.</textarea>
+      
+      <div class="actions">
+        <button id="analyzeBtn" class="btn-primary">
+          <span class="btn-icon">⚡</span> Text analysieren
+        </button>
+      </div>
+    </section>
+
+    <!-- Metrics & Sentiment Strip -->
+    <section id="metricsSection" class="grid-metrics" style="display: none;">
+      <div class="metric-box">
+        <span class="metric-title">Wörter (Tokens)</span>
+        <span class="metric-value" id="statTokens">0</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-title">Sätze</span>
+        <span class="metric-value" id="statSentences">0</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-title">Substantive & Verben</span>
+        <span class="metric-value" id="statNounsVerbs">0 / 0</span>
+      </div>
+      <div class="metric-box sentiment-box" id="sentimentCard">
+        <span class="metric-title">Stimmung (Sentiment)</span>
+        <span class="metric-value" id="sentimentLabel">Neutral</span>
+        <small id="sentimentPolarity">Polarität: 0.0</small>
+      </div>
+    </section>
+
+    <!-- Compound Words & NER Grid -->
+    <section id="secondaryGrid" class="grid-two-col" style="display: none;">
+      <!-- Compounds -->
+      <div class="card">
+        <h3>🔍 Komposita-Zerlegung (Compound Breakdown)</h3>
+        <div id="compoundsContainer" class="badge-container">
+          <p class="empty-hint">Keine zusammengesetzten Substantive gefunden.</p>
+        </div>
+      </div>
+
+      <!-- Entities -->
+      <div class="card">
+        <h3>🏷️ Benannte Entitäten (Named Entities - NER)</h3>
+        <div id="entitiesContainer" class="badge-container">
+          <p class="empty-hint">Keine Eigennamen oder Entitäten erkannt.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Linguistic Table -->
+    <section id="resultsSection" class="card" style="display: none;">
+      <h3>🔬 Detaillierte Wort- und Grammatikanalyse</h3>
+      <div class="table-responsive">
+        <table class="nlp-table">
+          <thead>
+            <tr>
+              <th>Wortform (Token)</th>
+              <th>Grundform (Lemma)</th>
+              <th>Wortart (POS)</th>
+              <th>Kasus (Case)</th>
+              <th>Genus (Gender)</th>
+              <th>Numerus (Number)</th>
+              <th>Syntax (Dep)</th>
+            </tr>
+          </thead>
+          <tbody id="tokensTableBody">
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
