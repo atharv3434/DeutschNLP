@@ -2,6 +2,7 @@
 Custom Compound Noun Deconstructive Matcher for German.
 Splits compound nouns into sub-lexemes while handling linking morphemes (Fugen-S, -en, -n).
 """
+
 import re
 from typing import List
 
